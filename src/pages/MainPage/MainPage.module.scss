@@ -1,0 +1,123 @@
+.page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    padding: 100px 0;
+    height: 100vh;
+    text-align: center;
+}
+
+.logo {
+    font-size: 72px;
+    font-weight: 900;
+    line-height: normal; 
+}
+
+.text {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+.text h1 {
+    font-size: 96px;
+    font-weight: 800;
+    line-height: normal;
+    max-width: 1280px;
+
+    background: linear-gradient(91deg, #FFF 3.89%, #9C9C9C 86.28%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.subtitle, .subtitle span {
+    font-size: 36px;
+    font-weight: 800;
+    line-height: normal;
+
+    background: linear-gradient(180deg, #FFF 0%, #9C9C9C 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.subtitle span {
+    background: linear-gradient(115deg, #F00, #FF0, #0F0, #0FF, #00F, #F00);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    -webkit-text-fill-color: transparent;
+    background-size: 600% 100%; 
+    animation: rainbow 5s ease-in-out infinite alternate;
+}
+
+@keyframes rainbow {
+    0% {
+        background-position: 0% 0%;
+    }
+    100% {
+        background-position: 100% 0%;
+    }
+}
+
+.lastParagraph {
+    font-size: 24px;
+    font-weight: 700;
+    line-height: normal;
+    background: linear-gradient(91deg, #C9C2C2 10.74%, #B6B6B6 19.81%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.button {
+    position: relative;
+    padding: 20px 40px;
+    border-radius: 100px;
+    background: linear-gradient(91deg, #F00, #FF0, #0F0, #0FF, #00F, #F00);
+    background-size: 600% 100%; 
+    overflow: hidden;
+    animation: rainbowBorder 5s ease-in-out infinite alternate;
+}
+
+.button::before {
+    content: '';
+    position: absolute;
+    top:  2px;
+    left: 2px; 
+    right:  2px;
+    bottom:  2px;
+    border-radius: 100px;
+    background: #000;
+}
+
+.button::after {
+    content: "Start a short walk-through";
+    color: #fff;
+    position: relative;
+    font-size: 20px;
+    font-weight: 700;
+    z-index: 1; /* Ensure the text is above the pseudo-element */
+}
+
+@keyframes rainbowBorder {
+    0% {
+        background-position: 0% 0%;
+    }
+    100% {
+        background-position: 100% 0%;
+    }
+}
+
+.canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: #000;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+}

@@ -14,10 +14,14 @@ const MainPage = () => {
 
   useEffect(() => {
     drawCanvas(canvas, starsRef, animationsRef, cursorPosition, starsMoving);
-    window.addEventListener("resize", drawCanvas);
+    window.addEventListener("resize", () =>
+      drawCanvas(canvas, starsRef, animationsRef, cursorPosition, starsMoving)
+    );
 
     return () => {
-      window.removeEventListener("resize", drawCanvas);
+      window.removeEventListener("resize", () =>
+        drawCanvas(canvas, starsRef, animationsRef, cursorPosition, starsMoving)
+      );
       animationsRef.current.forEach((animationRef) => {
         cancelAnimationFrame(animationRef.current);
       });
@@ -75,11 +79,12 @@ const MainPage = () => {
           <p className={styles.lastParagraph}>
             Clients will lose their minds in space
           </p>
+          <button className={styles.button} onClick={startWalkThrough}>
+            <div></div>
+            <span>Start a short walk-through</span>
+          </button>
         </div>
-        <button className={styles.button} onClick={startWalkThrough}>
-          <div></div>
-          <span>Start a short walk-through</span>
-        </button>
+        <span></span>
       </div>
     </>
   );

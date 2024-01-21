@@ -124,10 +124,11 @@ const drawCanvas = (
   cursorPosition,
   starsMoving
 ) => {
+  if (!canvas.current) return;
   const ctx = canvas.current.getContext("2d");
   const width = window.innerWidth;
   const height = window.innerHeight;
-  const starsCount = 800;
+  const starsCount = 300;
 
   if (!starsRef.current.length) {
     createStars(starsRef, starsCount, width, height);

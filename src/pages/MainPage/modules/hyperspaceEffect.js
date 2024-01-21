@@ -1,4 +1,5 @@
 const hyperspaceEffect = (canvas, starsRef, animationsRef) => {
+  if (!canvas.current) return;
   const ctx = canvas.current.getContext("2d");
   const width = window.innerWidth;
   const height = window.innerHeight;

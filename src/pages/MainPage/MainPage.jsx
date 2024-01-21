@@ -1,7 +1,9 @@
 import React, { useEffect, useRef, useState } from "react";
 import styles from "./MainPage.module.scss";
-import drawCanvas from "./drawCanvas";
-import hyperspaceEffect from "./hyperspaceEffect";
+import drawCanvas from "./modules/drawCanvas";
+import hyperspaceEffect from "./modules/hyperspaceEffect";
+import { useNavigate } from "react-router-dom";
+import { darknessEffect, releaseDarknessEffect } from "../../functions/effects";
 
 const MainPage = () => {
   const canvas = useRef(null);
@@ -12,13 +14,22 @@ const MainPage = () => {
   const [wasButtonClicked, setWasButtonClicked] = useState(false);
   const cursorPosition = useRef({ x: 0, y: 0 });
 
+  const navigate = useNavigate();
+
   useEffect(() => {
     drawCanvas(canvas, starsRef, animationsRef, cursorPosition, starsMoving);
     window.addEventListener("resize", () =>
       drawCanvas(canvas, starsRef, animationsRef, cursorPosition, starsMoving)
     );
 
+    const handleMouseMove = (e) => {
+      cursorPosition.current = { x: e.clientX, y: e.clientY };
+    };
+
+    document.addEventListener("mousemove", handleMouseMove);
+
     return () => {
+      document.removeEventListener("mousemove", handleMouseMove);
       window.removeEventListener("resize", () =>
         drawCanvas(canvas, starsRef, animationsRef, cursorPosition, starsMoving)
       );
@@ -28,16 +39,11 @@ const MainPage = () => {
     };
   }, []);
 
-  const darknessEffect = (next, timeout) => {
-    const effectBlock = document.querySelector(".effect-block");
-    effectBlock.classList.add(styles.darkness);
-
-    setTimeout(() => {
-      effectBlock.classList.remove(styles.darkness);
-      if (next) {
-        next();
-      }
-    }, timeout);
+  const resetAnimations = () => {
+    animationsRef.current.forEach((animationRef) => {
+      cancelAnimationFrame(animationRef.current);
+    });
+    animationsRef.current = [];
   };
 
   const startWalkThrough = () => {
@@ -47,22 +53,11 @@ const MainPage = () => {
       hyperspaceEffect(canvas, starsRef, animationsRef);
 
       setTimeout(() => {
-        darknessEffect(null, 3000);
-      }, 3000);
+        resetAnimations();
+        darknessEffect(() => navigate("/walk-through"), 1000);
+      }, 2000);
     }
   };
-
-  useEffect(() => {
-    const handleMouseMove = (e) => {
-      cursorPosition.current = { x: e.clientX, y: e.clientY };
-    };
-
-    document.addEventListener("mousemove", handleMouseMove);
-
-    return () => {
-      document.removeEventListener("mousemove", handleMouseMove);
-    };
-  }, []);
 
   return (
     <>

@@ -2,10 +2,11 @@ import React, { useEffect } from "react";
 import * as THREE from "three";
 import { GLTFLoader } from "three/addons/loaders/GLTFLoader";
 
-import SceneInit from "../lib/SceneInit";
+import SceneInit from "../../lib/SceneInit";
 
-const ModelsView = () => {
+const ModelsView = ({ active }) => {
   useEffect(() => {
+    if (!active) return;
     const glftLoader = new GLTFLoader();
 
     const burgerScene = new SceneInit("three-canvas-burger");
@@ -34,13 +35,18 @@ const ModelsView = () => {
     };
 
     animateBurger();
-  }, []);
+  }, [active]);
+
+  console.log(active);
 
   return (
-    <div>
-      <p>A 3D model</p>
+    <div style={{ display: active ? "block" : "none" }}>
+      <p style={{ zIndex: 1 }}>A 3D model</p>
       <div style={{ display: "flex" }}>
-        <canvas style={{ width: "50%" }} id="three-canvas-burger" />
+        <canvas
+          style={{ position: "absolute", top: 0 }}
+          id="three-canvas-burger"
+        />
       </div>
     </div>
   );

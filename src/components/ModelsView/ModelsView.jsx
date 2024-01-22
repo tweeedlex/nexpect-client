@@ -1,12 +1,19 @@
 import React, { useEffect } from "react";
 import * as THREE from "three";
 import { GLTFLoader } from "three/addons/loaders/GLTFLoader";
+import styles from "./ModelsView.module.scss";
 
 import SceneInit from "../../lib/SceneInit";
 
-const ModelsView = ({ active }) => {
+const ModelsView = ({ active, next }) => {
   useEffect(() => {
-    if (!active) return;
+    if (!active) {
+      const canvas = document.getElementById("three-canvas-burger");
+      if (canvas) {
+        canvas.remove();
+      }
+      return;
+    }
     const glftLoader = new GLTFLoader();
 
     const burgerScene = new SceneInit("three-canvas-burger");
@@ -37,18 +44,27 @@ const ModelsView = ({ active }) => {
     animateBurger();
   }, [active]);
 
-  console.log(active);
-
   return (
-    <div style={{ display: active ? "block" : "none" }}>
-      <p style={{ zIndex: 1 }}>A 3D model</p>
-      <div style={{ display: "flex" }}>
-        <canvas
-          style={{ position: "absolute", top: 0 }}
-          id="three-canvas-burger"
-        />
-      </div>
-    </div>
+    <>
+      {active ? (
+        <div style={{ display: active ? "block" : "none" }}>
+          <p
+            className={styles.p}
+            style={{ display: active ? "block" : "none" }}
+          >
+            A 3D model
+          </p>
+          <div>
+            <canvas className={styles.canvas} id="three-canvas-burger" />
+          </div>
+          <button className={styles.button} onClick={() => next()}>
+            Show me more!
+          </button>
+        </div>
+      ) : (
+        <></>
+      )}
+    </>
   );
 };
 

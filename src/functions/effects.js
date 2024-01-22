@@ -3,10 +3,11 @@ export const darknessEffect = (next, timeout) => {
   effectBlock.classList.add("darkness");
 
   setTimeout(() => {
-    effectBlock.classList.remove("darkness");
     if (next) {
       next();
     }
+    effectBlock.classList.remove("darkness");
+    effectBlock.style.display = "none";
   }, timeout);
 };
 
@@ -15,9 +16,10 @@ export const releaseDarknessEffect = (next, timeout) => {
   effectBlock.classList.add("darkness");
 
   setTimeout(() => {
-    effectBlock.style.opacity = 0;
     if (next) {
       next();
     }
+    effectBlock.style.opacity = 0;
+    effectBlock.style.display = "none";
   }, timeout);
 };

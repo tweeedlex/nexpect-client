@@ -1,0 +1,87 @@
+.p {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translate(-50%, 0);
+    font-size: 60px;
+    font-weight: 500;
+    z-index: 10;
+    top: 100px;
+}
+
+.canvas {
+    position: absolute;
+    top: 0;
+}
+
+.button {
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, 0);
+    font-size: 18px;
+    font-weight: 500;
+    z-index: 10;
+    bottom: 100px;
+    border: 1px solid #fff;
+    padding: 15px 20px;
+    border-radius: 5px;
+    background-color: #fff;
+    color: #fff;
+    overflow: hidden;
+    transition: all 0.3s ease-in-out;
+    opacity: 0;
+    animation: appear 2s ease-in-out 1s forwards;
+
+    &::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 50%;
+        width: 0;
+        height: 100%;
+        transform: translate(-50%, 0);
+        background-color: #000;
+        transition: all 0.2s ease-in-out;
+        z-index: -1;
+        animation: checkme 2s infinite ease;
+    }
+
+    &:hover {
+        &::after {
+           width: 0;
+           animation: none;
+        }
+        color: #000000;
+    }
+}
+
+@keyframes checkme {
+    0% {
+        width: 0%;
+    }
+    25% {
+        width: 90%;
+    }
+    50% {
+        width: 80%;
+    }
+    60% {
+        width: 100%;
+    }
+    100% {
+        width: 0%;
+    }
+}
+
+@keyframes appear {
+    0% {
+        opacity: 0;
+        display: none;
+        transform: translate(-50%, 50px);
+    }
+    100% {
+        opacity: 1;
+        transform: translate(-50%, 0);
+    }
+    
+}

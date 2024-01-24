@@ -134,3 +134,111 @@
     height: 100%;
     z-index: -1;
 }
+
+@media (max-width: 1023px) {
+    .page {
+        padding: 50px 0;
+    }
+
+    .logo {
+        font-size: 48px;
+    }
+
+    .text h1 {
+        font-size: 72px;
+    }
+
+    .subtitle, .subtitle span {
+        font-size: 24px;
+    }
+
+    .lastParagraph {
+        font-size: 18px;
+    }
+
+    .button {
+        padding: 10px 20px;
+    }
+
+    .button:hover {
+        padding: 10px 30px;
+    }
+
+    .button span {
+        font-size: 16px;
+    }
+}
+
+@media (max-width: 767px) {
+    .page {
+        padding: 20px 0;
+    }
+
+    .logo {
+        font-size: 36px;
+    }
+
+    .text h1 {
+        font-size: 48px;
+    }
+
+    .subtitle, .subtitle span {
+        font-size: 18px;
+    }
+
+    .lastParagraph {
+        font-size: 14px;
+    }
+
+    .button {
+        padding: 10px 20px;
+    }
+
+    .button:hover {
+        padding: 10px 30px;
+    }
+
+    .button span {
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 479px) {
+    
+.text {
+    gap: 10px;
+}
+
+
+    .page {
+        padding: 20px 0;
+    }
+
+    .logo {
+        font-size: 24px;
+    }
+
+    .text h1 {
+        font-size: 36px;
+    }
+
+    .subtitle, .subtitle span {
+        font-size: 14px;
+    }
+
+    .lastParagraph {
+        font-size: 12px;
+    }
+
+    .button {
+        padding: 10px 20px;
+    }
+
+    .button:hover {
+        padding: 10px 30px;
+    }
+
+    .button span {
+        font-size: 12px;
+    }
+}

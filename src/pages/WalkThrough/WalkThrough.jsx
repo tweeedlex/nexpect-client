@@ -2,26 +2,25 @@ import React, { useEffect, useState } from "react";
 import { releaseDarknessEffect } from "../../functions/effects";
 import Slide from "../../components/Slide/Slide";
 import ModelsView from "../../components/ModelsView/ModelsView";
-import InteractivityView from "../../components/InteractivityView/InteractivityView";
+import ScrollView from "../../components/ScrollView/ScrollView";
 
 const WalkThrough = () => {
   const [firstSlides, setFirstSlides] = useState([
     { text: "We can create", active: true },
-    { text: "Any site", active: false },
+    { text: "any site", active: false },
     { text: "that you can", active: false },
     { text: "imagine", active: false },
     { text: "Let’s put on your site", active: false },
   ]);
 
   const [interactivitySlides, setInteractivitySlides] = useState([
-    { text: "Many interactivity", active: true },
-    { text: "and", active: false },
-    { text: "LOTS", active: false },
-    { text: "of animations", active: false },
+    { text: "Let your site", active: false },
+    { text: "be an interactive", active: false },
+    { text: "MOVIE", active: false },
   ]);
 
   const [modelsViewActive, setModelsViewActive] = useState(false);
-  const [interactivityViewActive, setInteractivityViewActive] = useState(false);
+  const [scrollViewActive, setScrollViewActive] = useState(false);
 
   const show3D = () => {
     setModelsViewActive(true);
@@ -40,6 +39,7 @@ const WalkThrough = () => {
 
   const startSlides = (slides, setSlides, interval, delay, next) => {
     let intervalID;
+    slides[0].active = true;
     setTimeout(() => {
       let nextSlideIndex = 0;
       intervalID = setInterval(() => {
@@ -66,8 +66,8 @@ const WalkThrough = () => {
 
   const continueAfter3D = () => {
     setModelsViewActive(false);
-    startSlides(interactivitySlides, setInteractivitySlides, 300, 300, () =>
-      setInteractivityViewActive(true)
+    startSlides(interactivitySlides, setInteractivitySlides, 400, 300, () =>
+      setScrollViewActive(true)
     );
   };
 
@@ -80,7 +80,7 @@ const WalkThrough = () => {
       {interactivitySlides.map((slide, index) => (
         <Slide key={index} text={slide.text} active={slide.active} />
       ))}
-      <InteractivityView active={interactivityViewActive} />
+      <ScrollView active={scrollViewActive} />
     </>
   );
 };

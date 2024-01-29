@@ -2,6 +2,18 @@
   background-color: #000218;
 }
 
+.light {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to right, #000326B2 0%, rgba(0, 0, 0, 0) 50%, #3900374D 100%), linear-gradient(to top, rgba(255, 255, 255, 0.1) 0%, rgba(0, 0, 0, 0) 240px);
+  z-index: 1;
+}
+
 .wrapper {
   display: flex;
   justify-content: center;
@@ -17,7 +29,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
   padding: 20px 0;
 }
 
@@ -58,16 +70,33 @@
 .arrowBox {
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
-  z-index: 0;
+  gap: 10px;
+
+  * {
+    user-select: none;
+  }
 }
+// .chevronSmall {
+//   animation: chevronSmall 1s ease infinite alternate;
+// }
+
+// @keyframes chevronSmall {
+//   0% {
+//     transform: translate(0, 0);
+//   }
+//   100% {
+//     transform: translate(0, -10px);
+//   }
+// }
 
 .chevron {
   position: absolute;
   bottom: 20px;
   opacity: 0.5;
   animation: chevron 2s ease;
+  user-select: none;
+  width: 100%;
 }
 
 @keyframes chevron {
@@ -99,8 +128,9 @@
 
 .background {
   position: absolute;
-  left: 0;
-  top: 0;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
   width: 100%;
   height: 100%;
   z-index: 0;
@@ -115,12 +145,9 @@
   z-index: 1;
 }
 
-.triangle {
+.triangle, .smallTriangle {
   position: absolute;
-}
-
-.smallTriangle {
-  position: absolute;
+  user-select: none;
 }
 
 .small-top {
@@ -173,6 +200,18 @@
   100% {
     translate: 0 0;
   }
+}
+
+@keyframes randomMove {
+  0% { transform: translate(0, 0); }
+  25% { transform: translate(2px, 2px); }
+  50% { transform: translate(-2px, 0); }
+  75% { transform: translate(2px, -2px); }
+  100% { transform: translate(-2px, 2px); }
+}
+
+.randomMove {
+  animation: randomMove 5s infinite;
 }
 
 .triangle:nth-child(1) {
@@ -584,4 +623,60 @@
   }
 }
 
+@media (max-width: 1279px) {
+  .title {
+    font-size: 96px;
+  }
 
+  .subtitle {
+    font-size: 36px;
+  }
+}
+
+@media (max-width: 1023px) {
+  .title {
+    font-size: 64px;
+  }
+
+  .subtitle {
+    font-size: 24px;
+  }
+}
+
+@media (max-width: 767px) {
+  .title {
+    font-size: 48px;
+  }
+
+  .subtitle {
+    font-size: 18px;
+  }
+
+  .arrow {
+    height: 120px;
+  }  
+
+  .chevronSmall {
+    width: 28px;
+  }
+}
+
+@media (max-width: 479px) {
+  .title {
+    font-size: 32px;
+  }
+
+  .subtitle {
+    font-size: 14px;
+  }
+}
+
+.progress {
+  position: fixed;
+  left: 0;
+  right: 0;
+  height: 5px;
+  background: #fff;
+  bottom: 100px;
+  z-index: 5;
+}

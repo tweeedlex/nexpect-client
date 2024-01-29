@@ -129,3 +129,7 @@ input {
     padding: 0 10px;
   }
 }
+
+html {
+  scroll-snap-type: y mandatory;
+}

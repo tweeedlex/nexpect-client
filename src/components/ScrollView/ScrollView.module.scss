@@ -10,7 +10,13 @@
   bottom: 0;
   width: 100%;
   height: 100%;
-  background: linear-gradient(to right, #000326B2 0%, rgba(0, 0, 0, 0) 50%, #3900374D 100%), linear-gradient(to top, rgba(255, 255, 255, 0.1) 0%, rgba(0, 0, 0, 0) 240px);
+  background: linear-gradient(
+      to right,
+      #000326b2 0%,
+      rgba(0, 0, 0, 0) 50%,
+      #3900374d 100%
+    ),
+    linear-gradient(to top, rgba(255, 255, 255, 0.1) 0%, rgba(0, 0, 0, 0) 240px);
   z-index: 1;
 }
 
@@ -60,7 +66,7 @@
 }
 
 .subtitle {
-  color: #FFF;
+  color: #fff;
   text-align: center;
   font-size: 48px;
   font-weight: 800;
@@ -113,7 +119,12 @@
   position: absolute;
   width: 100%;
   height: 100%;
-  background: ease-gradient(90deg, rgba(0, 3, 38, 0.70) 0.07%, rgba(0, 0, 0, 0.00) 52.05%, rgba(57, 0, 55, 0.30) 99.92%);
+  background: ease-gradient(
+    90deg,
+    rgba(0, 3, 38, 0.7) 0.07%,
+    rgba(0, 0, 0, 0) 52.05%,
+    rgba(57, 0, 55, 0.3) 99.92%
+  );
   z-index: 1;
 }
 
@@ -122,7 +133,11 @@
   bottom: 0;
   width: 100%;
   height: 240px;
-  background: ease-gradient(0deg, rgba(255, 255, 255, 0.15) 0%, rgba(255, 255, 255, 0.00) 100%);
+  background: ease-gradient(
+    0deg,
+    rgba(255, 255, 255, 0.15) 0%,
+    rgba(255, 255, 255, 0) 100%
+  );
   z-index: 5;
 }
 
@@ -145,7 +160,8 @@
   z-index: 1;
 }
 
-.triangle, .smallTriangle {
+.triangle,
+.smallTriangle {
   position: absolute;
   user-select: none;
 }
@@ -203,11 +219,21 @@
 }
 
 @keyframes randomMove {
-  0% { transform: translate(0, 0); }
-  25% { transform: translate(2px, 2px); }
-  50% { transform: translate(-2px, 0); }
-  75% { transform: translate(2px, -2px); }
-  100% { transform: translate(-2px, 2px); }
+  0% {
+    transform: translate(0, 0);
+  }
+  25% {
+    transform: translate(2px, 2px);
+  }
+  50% {
+    transform: translate(-2px, 0);
+  }
+  75% {
+    transform: translate(2px, -2px);
+  }
+  100% {
+    transform: translate(-2px, 2px);
+  }
 }
 
 .randomMove {
@@ -235,7 +261,7 @@
   height: 80.37px;
   top: 800.71px;
   left: 160.39px;
-  transform: rotate(-20.29deg);  
+  transform: rotate(-20.29deg);
 }
 
 .triangle:nth-child(4) {
@@ -243,7 +269,7 @@
   height: 171.86px;
   top: 637.94px;
   left: 195.81px;
-  transform: rotate(-45.06deg);  
+  transform: rotate(-45.06deg);
 }
 
 .triangle:nth-child(5) {
@@ -251,7 +277,7 @@
   height: 140.86px;
   top: 747.94px;
   left: 325.81px;
-  transform: rotate(15.06deg);  
+  transform: rotate(15.06deg);
 }
 
 .triangle:nth-child(6) {
@@ -259,7 +285,7 @@
   height: 120.86px;
   top: 650.94px;
   left: 425.81px;
-  transform: rotate(65.06deg);  
+  transform: rotate(65.06deg);
 }
 
 .triangle:nth-child(7) {
@@ -267,7 +293,7 @@
   height: 100.86px;
   top: 580.94px;
   left: 425.81px;
-  transform: rotate(115.06deg);  
+  transform: rotate(115.06deg);
 }
 
 .triangle:nth-child(8) {
@@ -275,7 +301,7 @@
   height: 200.86px;
   top: 640.94px;
   left: 545.81px;
-  transform: rotate(115.06deg);  
+  transform: rotate(115.06deg);
 }
 
 .triangle:nth-child(9) {
@@ -283,7 +309,7 @@
   height: 80.86px;
   top: 540.94px;
   left: 515.81px;
-  transform: rotate(205.06deg);  
+  transform: rotate(205.06deg);
 }
 
 .triangle:nth-child(10) {
@@ -291,7 +317,7 @@
   height: 75.86px;
   top: 650.94px;
   left: 685.81px;
-  transform: rotate(175.06deg);  
+  transform: rotate(175.06deg);
 }
 
 .triangle:nth-child(11) {
@@ -299,7 +325,7 @@
   height: 130.86px;
   top: 520.94px;
   left: 615.81px;
-  transform: rotate(205.06deg);  
+  transform: rotate(205.06deg);
 }
 
 .triangle:nth-child(12) {
@@ -307,7 +333,7 @@
   height: 230.86px;
   top: 360.94px;
   left: 695.81px;
-  transform: rotate(165.06deg);  
+  transform: rotate(165.06deg);
 }
 
 .triangle:nth-child(13) {
@@ -315,7 +341,7 @@
   height: 180.86px;
   top: 600.94px;
   left: 795.81px;
-  transform: rotate(135.06deg);  
+  transform: rotate(135.06deg);
 }
 
 .triangle:nth-child(14) {
@@ -323,7 +349,7 @@
   height: 280.86px;
   top: 330.94px;
   left: 865.81px;
-  transform: rotate(-30.06deg);  
+  transform: rotate(-30.06deg);
 }
 
 .triangle:nth-child(15) {
@@ -331,7 +357,7 @@
   height: 120.86px;
   top: 300.94px;
   left: 1025.81px;
-  transform: rotate(188.06deg);  
+  transform: rotate(188.06deg);
 }
 
 .triangle:nth-child(16) {
@@ -339,7 +365,7 @@
   height: 70.86px;
   top: 560.94px;
   left: 1198.81px;
-  transform: rotate(188.06deg);  
+  transform: rotate(188.06deg);
 }
 
 .triangle:nth-child(17) {
@@ -347,7 +373,7 @@
   height: 480.86px;
   top: 50px;
   left: 1048.81px;
-  transform: rotate(198.06deg);  
+  transform: rotate(198.06deg);
 }
 
 .triangle:nth-child(18) {
@@ -355,7 +381,7 @@
   height: 260.86px;
   top: 300.94px;
   left: 1398.81px;
-  transform: rotate(130.06deg);  
+  transform: rotate(130.06deg);
 }
 
 .triangle:nth-child(19) {
@@ -363,7 +389,7 @@
   height: 560.86px;
   top: -300.94px;
   left: 1498.81px;
-  transform: rotate(-20.06deg);  
+  transform: rotate(-20.06deg);
 }
 
 // animation for triangles (one by one from left edge of screen)
@@ -654,7 +680,7 @@
 
   .arrow {
     height: 120px;
-  }  
+  }
 
   .chevronSmall {
     width: 28px;
@@ -679,4 +705,7 @@
   background: #fff;
   bottom: 100px;
   z-index: 5;
+}
+
+.screen2 {
 }

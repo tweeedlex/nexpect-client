@@ -1,37 +1,12 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./ScrollView.module.scss";
 import triangleImage from "../../img/polygon.png";
 import smallTriangleImage from "../../img/triangleSmall.png";
 import chevronImage from "../../img/chevron.png";
 import arrowImage from "../../img/arrow-down.png";
-import { motion, useScroll, useSpring, useTransform } from "framer-motion";
-
-function useParallax(value, distance) {
-  return useTransform(value, [0, 1], [-distance, distance]);
-}
-
-const Screen = ({ offset, children }) => {
-  const ref = useRef(null);
-  const { scrollYProgress } = useScroll({ target: ref });
-  const y = useParallax(scrollYProgress, offset * window.innerHeight);
-
-  return (
-    <motion.div
-      ref={ref}
-      style={{
-        y,
-        position: "absolute",
-        top: offset * 100 + "vh",
-        width: "calc(100%)",
-        height: "100vh",
-        left: 0,
-        scrollSnapAlign: "center",
-      }}
-    >
-      {children}
-    </motion.div>
-  );
-};
+import { motion, useScroll, useSpring } from "framer-motion";
+import Screen from "../Screen/Screen";
+import ParallaxText from "../ParallaxText/ParallaxText";
 
 const ScrollView = ({ active }) => {
   const { scrollYProgress } = useScroll();
@@ -176,7 +151,12 @@ const ScrollView = ({ active }) => {
               </div>
             </div>
           </Screen>
-          <Screen offset={1} />
+          <Screen offset={1}>
+            <div className={styles.screen2}>
+              <ParallaxText baseVelocity={-5}>Your Text Here</ParallaxText>
+              <ParallaxText baseVelocity={5}>Your Other Text Here</ParallaxText>
+            </div>
+          </Screen>
           <Screen offset={2} />
           <motion.div className={styles.progress} style={{ scaleX }} />
         </div>

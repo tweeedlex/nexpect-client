@@ -1,7 +1,3 @@
-.body {
-  background-color: #000218;
-}
-
 .light {
   position: absolute;
   top: 0;
@@ -83,18 +79,19 @@
     user-select: none;
   }
 }
-// .chevronSmall {
-//   animation: chevronSmall 1s ease infinite alternate;
-// }
+.chevronSmall {
+  z-index: 10;
+  animation: chevronSmall 1s ease infinite alternate;
+}
 
-// @keyframes chevronSmall {
-//   0% {
-//     transform: translate(0, 0);
-//   }
-//   100% {
-//     transform: translate(0, -10px);
-//   }
-// }
+@keyframes chevronSmall {
+  0% {
+    transform: translate(0, 0);
+  }
+  100% {
+    transform: translate(0, -10px);
+  }
+}
 
 .chevron {
   position: absolute;
@@ -703,9 +700,103 @@
   right: 0;
   height: 5px;
   background: #fff;
-  bottom: 100px;
+  bottom: 0;
   z-index: 5;
 }
 
 .screen2 {
+  display: flex;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.contentScreen2 {
+  flex-direction: row;
+  justify-content: center;
+  width: 100%;
+}
+
+.abstractLeftImage {
+  position: absolute;
+  height: 100%;
+  left: 0;
+  transform: translate(-50%, 0);
+}
+
+.abstractRightImage {
+  position: absolute;
+  height: 100vh;
+  right: 0;
+  transform: translate(50%, 0) scale(1.5);
+}
+
+.screen3 {
+  display: flex;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.contentScreen3 {
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+  gap: 20px;
+
+  button {
+    width: 250px;
+    max-width: 400px;
+    height: 60px;
+    border-radius: 30px;
+    background-color: #fff;
+    color: #000;
+    font-size: 18px;
+    font-weight: 600;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    gap: 5px;
+    align-items: center;
+    justify-content: center;
+
+    &:hover {
+      width: 360px;
+    }
+
+    img {
+      height: 18px;
+    }
+  }
+}
+
+@media (max-width: 767px) {
+  .contentScreen3 {
+    button {
+      width: 200px;
+      height: 50px;
+      font-size: 16px;
+
+      img {
+        height: 16px;
+      }
+    }
+  }
+}
+
+@media (max-width: 479px) {
+  .contentScreen3 {
+    gap: 10px;
+    button {
+      width: 160px;
+      height: 36px;
+      font-size: 14px;
+
+      img {
+        height: 14px;
+      }
+    }
+  }
 }

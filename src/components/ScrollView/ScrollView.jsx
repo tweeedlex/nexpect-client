@@ -4,11 +4,14 @@ import triangleImage from "../../img/polygon.png";
 import smallTriangleImage from "../../img/triangleSmall.png";
 import chevronImage from "../../img/chevron.png";
 import arrowImage from "../../img/arrow-down.png";
-import { motion, useScroll, useSpring } from "framer-motion";
+import { motion, useScroll, useSpring, useTransform } from "framer-motion";
 import Screen from "../Screen/Screen";
-import ParallaxText from "../ParallaxText/ParallaxText";
+import abstractRightImage from "../../img/abstract-right.png";
+import abstractLeftImage from "../../img/abstract-left.png";
+import mailImage from "../../img/mail.png";
 
 const ScrollView = ({ active }) => {
+  const [triangles, setTriangles] = useState([]);
   const { scrollYProgress } = useScroll();
   const scaleX = useSpring(scrollYProgress, {
     stiffness: 100,
@@ -16,14 +19,40 @@ const ScrollView = ({ active }) => {
     restDelta: 0.001,
   });
 
-  useEffect(() => {
-    if (active) {
-      const body = document.querySelector("body");
-      body.className = styles.body;
+  const scrollHandler = () => {
+    console.log(scrollYProgress.get());
+    if (scrollYProgress.get() < 0.25) {
+      document.body.style.backgroundColor = "#000218";
+    } else if (scrollYProgress.get() < 0.75) {
+      document.body.style.backgroundColor = "#c647d1";
+    } else {
+      document.body.style.backgroundColor = "#1C1A75";
     }
+  };
+
+  useEffect(() => {
+    const body = document.querySelector("body");
+    const app = document.querySelector(".App");
+    window.addEventListener("scroll", scrollHandler);
+
+    if (active) {
+      window.scrollTo(0, 0);
+      body.className = styles.body;
+      app.style.padding = 0;
+    }
+
+    return () => {
+      body.className = "";
+      app.style.padding = "0 20px";
+      window.removeEventListener("scroll", scrollHandler);
+    };
   }, [active]);
 
-  const [triangles, setTriangles] = useState([]);
+  useEffect(() => {
+    if (active) {
+      scrollHandler();
+    }
+  }, [scrollYProgress]);
 
   useEffect(() => {
     const handleMouseMove = (event) => {
@@ -97,13 +126,18 @@ const ScrollView = ({ active }) => {
   return (
     <>
       {active ? (
-        <div style={{ height: "300vh", scrollSnapType: "y mandatory" }}>
+        <div
+          style={{
+            height: "500vh",
+            scrollSnapType: "y mandatory",
+            position: "relative",
+            transition: "background-color 0.3s ease",
+          }}
+        >
           <Screen offset={0}>
             <div className={styles.wrapper}>
               <div className={styles.light}></div>
               <div className={styles.content}>
-                <span></span>
-                <span></span>
                 <span></span>
                 <div className={styles.text}>
                   <div className={styles.title}>Just scroll down</div>
@@ -112,20 +146,12 @@ const ScrollView = ({ active }) => {
                   </div>
                 </div>
                 <img className={styles.chevron} src={chevronImage} alt="" />
-                <div className={styles.arrowBox}>
-                  <img
-                    className={styles.arrow}
-                    src={arrowImage}
-                    alt=""
-                    height={240}
-                  />
-                  <img
-                    className={styles.chevronSmall}
-                    src={chevronImage}
-                    alt=""
-                    width={40}
-                  />
-                </div>
+                <img
+                  className={styles.chevronSmall}
+                  src={chevronImage}
+                  alt=""
+                  width={40}
+                />
               </div>
               <div className={styles.backgroundLayerTop}>
                 {triangles.map((triangle) => (
@@ -141,6 +167,7 @@ const ScrollView = ({ active }) => {
                   />
                 ))}
               </div>
+              <div className="imges"></div>
               <div className={styles.background}>
                 {[...Array(19)].map(() => (
                   <img src={triangleImage} className={styles.triangle} alt="" />
@@ -151,13 +178,38 @@ const ScrollView = ({ active }) => {
               </div>
             </div>
           </Screen>
-          <Screen offset={1}>
-            <div className={styles.screen2}>
-              <ParallaxText baseVelocity={-5}>Your Text Here</ParallaxText>
-              <ParallaxText baseVelocity={5}>Your Other Text Here</ParallaxText>
+          <Screen className={styles.screen2} offset={1}>
+            <div className={styles.content + " " + styles.contentScreen2}>
+              <div className={styles.text}>
+                <div className={styles.title}>We can create</div>
+                <div className={styles.subtitle}>site like this for you</div>
+              </div>
+            </div>
+            <img
+              src={abstractLeftImage}
+              className={styles.abstractLeftImage}
+              alt=""
+            />
+            <img
+              src={abstractRightImage}
+              className={styles.abstractRightImage}
+              alt=""
+            />
+          </Screen>
+          <Screen offset={2} className={styles.screen3}>
+            <div className={styles.content + " " + styles.contentScreen3}>
+              <div className={styles.text}>
+                <div className={styles.title}>Unique, interesting</div>
+                <div className={styles.subtitle}>
+                  just text us, let’s discuss!
+                </div>
+              </div>
+              <button>
+                <img src={mailImage} alt="" />
+                Contact us
+              </button>
             </div>
           </Screen>
-          <Screen offset={2} />
           <motion.div className={styles.progress} style={{ scaleX }} />
         </div>
       ) : null}

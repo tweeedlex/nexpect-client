@@ -19,8 +19,23 @@ const ScrollView = ({ active }) => {
     restDelta: 0.001,
   });
 
+  // animations when appear on the screen
+
+  const intersectionObserver = new IntersectionObserver((entries) => {
+    console.log(entries);
+    entries.forEach((entry) => {
+      console.log(entry);
+      if (entry.isIntersecting) {
+        entry.target.classList.add(styles.show);
+      } else {
+        entry.target.classList.remove(styles.show);
+      }
+    });
+  });
+
+  // change background color on scroll
+
   const scrollHandler = () => {
-    console.log(scrollYProgress.get());
     if (scrollYProgress.get() < 0.25) {
       document.body.style.backgroundColor = "#000218";
     } else if (scrollYProgress.get() < 0.75) {
@@ -34,6 +49,9 @@ const ScrollView = ({ active }) => {
     const body = document.querySelector("body");
     const app = document.querySelector(".App");
     window.addEventListener("scroll", scrollHandler);
+
+    const hiddenElements = document.querySelectorAll(".hidden");
+    hiddenElements.forEach((e) => intersectionObserver.observe(e));
 
     if (active) {
       window.scrollTo(0, 0);
@@ -167,10 +185,14 @@ const ScrollView = ({ active }) => {
                   />
                 ))}
               </div>
-              <div className="imges"></div>
               <div className={styles.background}>
-                {[...Array(19)].map(() => (
-                  <img src={triangleImage} className={styles.triangle} alt="" />
+                {[...Array(19)].map((_, i) => (
+                  <img
+                    src={triangleImage}
+                    key={i}
+                    className={styles.triangle}
+                    alt=""
+                  />
                 ))}
               </div>
               <div className={styles.light}>
@@ -187,12 +209,12 @@ const ScrollView = ({ active }) => {
             </div>
             <img
               src={abstractLeftImage}
-              className={styles.abstractLeftImage}
+              className={`${styles.abstractLeftImage} ${styles.hidden} hidden`}
               alt=""
             />
             <img
               src={abstractRightImage}
-              className={styles.abstractRightImage}
+              className={`${styles.abstractRightImage} ${styles.hidden} hidden`}
               alt=""
             />
           </Screen>

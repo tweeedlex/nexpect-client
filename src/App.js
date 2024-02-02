@@ -2,6 +2,7 @@ import MainPage from "./pages/MainPage/MainPage";
 import ModelsView from "./components/ModelsView/ModelsView";
 import { Routes, Route } from "react-router-dom";
 import WalkThrough from "./pages/WalkThrough/WalkThrough";
+import { useEffect } from "react";
 
 function App() {
   return (

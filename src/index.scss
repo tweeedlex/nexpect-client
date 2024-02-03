@@ -120,16 +120,6 @@ input {
   transition: all 0.5s ease-in-out;
 }
 
-.App {
-  padding: 0 20px;
-}
-
-@media (max-width: 479px) {
-  .App {
-    padding: 0 10px;
-  }
-}
-
 html {
   scroll-snap-type: y mandatory;
 }

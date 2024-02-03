@@ -8,7 +8,10 @@ import { motion, useScroll, useSpring, useTransform } from "framer-motion";
 import Screen from "../Screen/Screen";
 import abstractRightImage from "../../img/abstract-right.png";
 import abstractLeftImage from "../../img/abstract-left.png";
+import abstractLeftBlueImage from "../../img/abstract-blue-left.png";
+import abstractRightBlueImage from "../../img/abstract-blue-right.png";
 import mailImage from "../../img/mail.png";
+import { Link } from "react-router-dom";
 
 const ScrollView = ({ active }) => {
   const [triangles, setTriangles] = useState([]);
@@ -22,9 +25,7 @@ const ScrollView = ({ active }) => {
   // animations when appear on the screen
 
   const intersectionObserver = new IntersectionObserver((entries) => {
-    console.log(entries);
     entries.forEach((entry) => {
-      console.log(entry);
       if (entry.isIntersecting) {
         entry.target.classList.add(styles.show);
       } else {
@@ -154,7 +155,6 @@ const ScrollView = ({ active }) => {
         >
           <Screen offset={0}>
             <div className={styles.wrapper}>
-              <div className={styles.light}></div>
               <div className={styles.content}>
                 <span></span>
                 <div className={styles.text}>
@@ -222,15 +222,25 @@ const ScrollView = ({ active }) => {
             <div className={styles.content + " " + styles.contentScreen3}>
               <div className={styles.text}>
                 <div className={styles.title}>Unique, interesting</div>
-                <div className={styles.subtitle}>
-                  just text us, let’s discuss!
-                </div>
+                <div className={styles.subtitle}>just let’s discuss!</div>
               </div>
-              <button>
-                <img src={mailImage} alt="" />
-                Contact us
-              </button>
+              <Link to="/contact-us">
+                <button>
+                  <img src={mailImage} alt="" />
+                  Contact us
+                </button>
+              </Link>
             </div>
+            <img
+              src={abstractLeftBlueImage}
+              className={`${styles.abstractLeftImage} ${styles.abstractLeftBlueImage} ${styles.hidden} hidden`}
+              alt=""
+            />
+            <img
+              src={abstractRightBlueImage}
+              className={`${styles.abstractRightImage} ${styles.abstractRightBlueImage} ${styles.hidden} hidden`}
+              alt=""
+            />
           </Screen>
           <motion.div className={styles.progress} style={{ scaleX }} />
         </div>

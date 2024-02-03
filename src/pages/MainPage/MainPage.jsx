@@ -22,6 +22,9 @@ const MainPage = () => {
       drawCanvas(canvas, starsRef, animationsRef, cursorPosition, starsMoving)
     );
 
+    const body = document.querySelector("body");
+    body.style.backgroundColor = "none";
+
     const handleMouseMove = (e) => {
       cursorPosition.current = { x: e.clientX, y: e.clientY };
     };

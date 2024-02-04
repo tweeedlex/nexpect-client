@@ -1,6 +1,8 @@
 .page {
   width: 100%;
-  height: 100vh;
+  height: 100%;
+  min-height: 100vh;
+  padding: 0 20px 20px 20px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -19,6 +21,7 @@
   border-radius: 30px;
   padding: 15px;
   background-color: #161616;
+  transition: 0.2s background-color ease;
 
   p {
     font-weight: 600;
@@ -30,6 +33,14 @@
 
   img {
     margin-bottom: 5px;
+  }
+
+  &:hover {
+    background-color: #252525;
+  }
+
+  &:active {
+    background-color: #101010;
   }
 }
 
@@ -82,6 +93,15 @@ h1 {
     font-size: 24px;
     font-weight: 600;
     cursor: pointer;
+    transition: 0.2s;
+
+    &:hover {
+      background-color: #ffdd00;
+    }
+
+    &:active {
+      background-color: #d39700;
+    }
   }
 
   * {
@@ -160,6 +180,7 @@ h1 {
 .contacts {
   display: flex;
   flex-direction: column;
+  align-items: flex-start;
   gap: 30px;
   margin-top: 20px;
 
@@ -167,6 +188,7 @@ h1 {
     display: flex;
     align-items: center;
     gap: 20px;
+    cursor: pointer;
   }
 
   p {
@@ -178,4 +200,147 @@ h1 {
   font-size: 64px;
   font-weight: 600;
   color: #ffb800;
+}
+
+@media (max-width: 1600px) {
+  .block {
+    width: 500px;
+    height: 600px;
+  }
+
+  .inputBlock {
+    p {
+      font-size: 14px;
+    }
+
+    input {
+      height: 50px;
+      font-size: 18px;
+
+      &::placeholder {
+        font-size: 18px;
+      }
+    }
+
+    textarea {
+      font-size: 16px;
+      padding: 15px;
+
+      &::placeholder {
+        font-size: 16px;
+      }
+    }
+  }
+
+  .contacts {
+    .contact {
+      gap: 10px;
+    }
+
+    p {
+      font-size: 20px;
+    }
+  }
+
+  .or {
+    font-size: 48px;
+  }
+
+  .back {
+    height: 140px;
+    width: 380px;
+    margin-top: -40px;
+
+    p {
+      font-size: 20px;
+    }
+  }
+
+  .block {
+    button {
+      width: 180px;
+      height: 50px;
+      font-size: 20px;
+    }
+  }
+}
+
+@media (max-width: 1239px) {
+  .block {
+    padding: 20px;
+    width: 400px;
+  }
+
+  .inputBlock {
+    textarea {
+      font-size: 14px;
+      height: 120px;
+    }
+  }
+}
+
+@media (max-width: 1023px) {
+  .blocks {
+    flex-direction: column;
+    gap: 50px;
+  }
+
+  .block {
+    width: 100%;
+    max-width: 500px;
+  }
+}
+
+@media (max-width: 767px) {
+  h1 {
+    font-size: 36px;
+  }
+
+  .page {
+    padding: 0 10px 20px 10px;
+  }
+
+  .back {
+    width: 250px;
+    margin-top: -30px;
+    padding: 10px;
+
+    p {
+      font-size: 18px;
+    }
+  }
+
+  .contacts {
+    margin-top: 10px;
+    gap: 20px;
+  }
+
+  .block {
+    height: fit-content;
+    padding: 15px;
+    h2 {
+      font-size: 24px;
+    }
+
+    textarea {
+      height: 120px;
+    }
+
+    button {
+      width: 150px;
+      height: 40px;
+      font-size: 18px;
+    }
+  }
+}
+
+.tooltip {
+  position: fixed;
+  background-color: white;
+  padding: 15px;
+  border-radius: 5px;
+  z-index: 1000;
+  color: #000;
+  font-size: 16px;
+  transition: 0.3s opacity ease;
 }

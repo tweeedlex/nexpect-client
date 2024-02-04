@@ -33,7 +33,7 @@
   font-weight: 800;
   line-height: normal;
   max-width: 1280px;
-  color: #ececec;
+  color: #fff;
 }
 
 .subtitle,
@@ -41,11 +41,7 @@
   font-size: 36px;
   font-weight: 800;
   line-height: normal;
-
-  background: linear-gradient(180deg, #fff 0%, #9c9c9c 100%);
-  background-clip: text;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+  color: #fff;
 }
 
 .subtitle span {
@@ -69,12 +65,9 @@
 
 .lastParagraph {
   font-size: 24px;
-  font-weight: 700;
+  font-weight: 600;
   line-height: normal;
-  background: linear-gradient(91deg, #c9c2c2 10.74%, #b6b6b6 19.81%);
-  background-clip: text;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+  color: #fff;
 }
 
 .button {

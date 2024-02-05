@@ -827,3 +827,28 @@
 .abstractRightImage {
   z-index: 1;
 }
+
+.transition {
+  background-color: #161616;
+  width: 100%;
+  height: 100%;
+  top: -100vh;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  position: fixed;
+  z-index: 1001;
+  &.show {
+    animation: appear 0.3s ease forwards;
+    top: 0;
+  }
+}
+
+@keyframes appear {
+  0% {
+    top: -100vh;
+  }
+  100% {
+    top: 0;
+  }
+}

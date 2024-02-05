@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import styles from "./ContactUs.module.scss";
 import chevronTopImage from "../../img/chevron-top.png";
 import instagramImage from "../../img/instagram.png";
@@ -7,13 +7,21 @@ import telegramImage from "../../img/telegram.png";
 import viberImage from "../../img/viber.png";
 import whatsappImage from "../../img/whatsapp.png";
 import mailImage from "../../img/mail-gray.png";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { sendContact } from "../../http/index";
+import Popup from "../../components/Popup/Popup";
 
 const ContactUs = () => {
   const [tooltip, setTooltip] = useState({ show: false, x: 0, y: 0 });
 
   useEffect(() => {
+    document.body.style.transition = "none";
     document.body.style.backgroundColor = "#161616";
+
+    return () => {
+      document.body.style.transition = "background-color 0.5s ease";
+      document.body.style.backgroundColor = "unset";
+    };
   }, []);
 
   let timeout = null;
@@ -30,14 +38,59 @@ const ContactUs = () => {
     );
   };
 
+  const navigate = useNavigate();
+  const page = useRef(null);
+
+  const returnToMainPage = () => {
+    page.current.classList.add(styles.disappear);
+    setTimeout(() => {
+      navigate("/");
+    }, 300);
+  };
+
+  const [contactData, setContactData] = useState({
+    name: "",
+    contacts: "",
+    message: "",
+  });
+
+  const [popupMessage, setPopupMessage] = useState({
+    visible: false,
+    text: "",
+  });
+
+  const sendForm = () => {
+    if (!contactData.name || !contactData.contacts) {
+      setPopupMessage({
+        visible: true,
+        text: "Please, fill in your name and contact information",
+      });
+      return;
+    }
+
+    sendContact(contactData);
+    setContactData({ name: "", contacts: "", message: "" });
+    setPopupMessage({ visible: true, text: "Thank you for your message!" });
+  };
+
   return (
-    <div className={styles.page}>
-      <Link to={"/"}>
-        <button className={styles.back}>
-          <img src={chevronTopImage} alt="" />
-          <p>Back to main page</p>
-        </button>
-      </Link>
+    <div className={styles.page} ref={page}>
+      <Popup
+        visible={popupMessage.visible}
+        className={styles.modal}
+        setVisible={() =>
+          setPopupMessage({
+            visible: false,
+            text: "",
+          })
+        }
+      >
+        <h2>{popupMessage.text}</h2>
+      </Popup>
+      <button className={styles.back} onClick={() => returnToMainPage()}>
+        <img src={chevronTopImage} alt="" />
+        <p>Back to main page</p>
+      </button>
       <div className={styles.content}>
         <h1>Let us create your site!</h1>
         <div className={styles.blocks}>
@@ -46,7 +99,14 @@ const ContactUs = () => {
             <div className={styles.form}>
               <div className={styles.inputBlock}>
                 <p className={styles.desription}>Your name</p>
-                <input type="text" placeholder="Bruce" />
+                <input
+                  type="text"
+                  placeholder="Bruce"
+                  value={contactData.name}
+                  onChange={(e) =>
+                    setContactData({ ...contactData, name: e.target.value })
+                  }
+                />
               </div>
               <div className={styles.inputBlock}>
                 <p className={styles.desription}>How can we contact you?</p>
@@ -56,6 +116,10 @@ const ContactUs = () => {
                   cols="30"
                   rows="10"
                   placeholder="Leave your email, any messenger username (specify messenger), etc.. so we can text you online"
+                  value={contactData.contacts}
+                  onChange={(e) =>
+                    setContactData({ ...contactData, contacts: e.target.value })
+                  }
                 />
               </div>
               <div className={styles.inputBlock}>
@@ -66,9 +130,13 @@ const ContactUs = () => {
                   cols="30"
                   rows="10"
                   placeholder="I want to make a site for my candies shop. Can you make a bright colorful online-store with 3D models of lollypops? :D"
+                  value={contactData.message}
+                  onChange={(e) =>
+                    setContactData({ ...contactData, message: e.target.value })
+                  }
                 />
               </div>
-              <button>Send</button>
+              <button onClick={sendForm}>Send</button>
             </div>
           </div>
           <p className={styles.or}>OR</p>

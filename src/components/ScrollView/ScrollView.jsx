@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import styles from "./ScrollView.module.scss";
 import triangleImage from "../../img/polygon.png";
 import smallTriangleImage from "../../img/triangleSmall.png";
@@ -11,11 +11,12 @@ import abstractLeftImage from "../../img/abstract-left.png";
 import abstractLeftBlueImage from "../../img/abstract-blue-left.png";
 import abstractRightBlueImage from "../../img/abstract-blue-right.png";
 import mailImage from "../../img/mail.png";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const ScrollView = ({ active }) => {
   const [triangles, setTriangles] = useState([]);
   const { scrollYProgress } = useScroll();
+  const navigate = useNavigate();
   const scaleX = useSpring(scrollYProgress, {
     stiffness: 100,
     damping: 30,
@@ -142,6 +143,15 @@ const ScrollView = ({ active }) => {
     setTriangles(trianglesData);
   }, []);
 
+  const transition = useRef(null);
+
+  const showContactUs = () => {
+    transition.current.classList.add(styles.show);
+    setTimeout(() => {
+      navigate("/contact-us");
+    }, 400);
+  };
+
   return (
     <>
       {active ? (
@@ -224,12 +234,10 @@ const ScrollView = ({ active }) => {
                 <div className={styles.title}>Unique, interesting</div>
                 <div className={styles.subtitle}>just let’s discuss!</div>
               </div>
-              <Link to="/contact-us">
-                <button>
-                  <img src={mailImage} alt="" />
-                  Contact us
-                </button>
-              </Link>
+              <button onClick={() => showContactUs()}>
+                <img src={mailImage} alt="" />
+                Contact us
+              </button>
             </div>
             <img
               src={abstractLeftBlueImage}
@@ -243,6 +251,7 @@ const ScrollView = ({ active }) => {
             />
           </Screen>
           <motion.div className={styles.progress} style={{ scaleX }} />
+          <div className={styles.transition} ref={transition}></div>
         </div>
       ) : null}
     </>

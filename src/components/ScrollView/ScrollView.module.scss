@@ -7,12 +7,11 @@
   width: 100%;
   height: 100%;
   background: linear-gradient(
-      to right,
-      #000326b2 0%,
-      rgba(0, 0, 0, 0) 50%,
-      #3900374d 100%
-    ),
-    linear-gradient(to top, rgba(255, 255, 255, 0.1) 0%, rgba(0, 0, 0, 0) 240px);
+    to right,
+    #000326b2 0%,
+    rgba(0, 0, 0, 0) 50%,
+    #3900374d 100%
+  );
   z-index: 1;
 }
 
@@ -141,9 +140,6 @@
 
 .background {
   position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
   width: 100%;
   height: 100%;
   z-index: 0;
@@ -816,11 +812,11 @@
 }
 
 .abstractLeftBlueImage {
-  transform: translate(-50%, -10%) scale(1.2);
+  transform: translate(-50%, 0) scale(1.2);
 }
 
 .abstractRightBlueImage {
-  transform: translate(50%, 0) scale(1);
+  transform: translate(50%, 0) scale(1.2);
 }
 
 .abstractLeftImage,
@@ -851,4 +847,13 @@
   100% {
     top: 0;
   }
+}
+
+.screen1 {
+  position: relative;
+}
+
+.screen1,
+.screen2 {
+  margin-bottom: 100vh;
 }

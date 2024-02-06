@@ -46,6 +46,9 @@ const draw = (
   starsMoving,
   animationsRef
 ) => {
+  width = window.innerWidth;
+  height = window.innerHeight;
+
   ctx.clearRect(0, 0, width, height);
 
   for (let i = 0; i < starsCount; i++) {
@@ -61,16 +64,6 @@ const draw = (
         star.y - (cursorPosition.current.y + 5),
         star.x - (cursorPosition.current.x + 5)
       );
-      star.speed *= -1;
-      const lerpFactor = 0.2;
-      star.x += Math.cos(angle) * 10 * lerpFactor;
-      star.y += Math.sin(angle) * 10 * lerpFactor;
-    }
-    if (distance < 20 + star.radius) {
-      const angle = Math.atan2(
-        star.y - (cursorPosition.current.y + 5),
-        star.x - (cursorPosition.current.x + 5)
-      );
       const force = 0.2;
       star.vx = Math.cos(angle) * force;
       star.vy = Math.sin(angle) * force;
@@ -78,21 +71,19 @@ const draw = (
 
     star.x += star.speed + star.vx;
     star.y += star.vy;
+    star.vx *= 0.9996;
+    star.vy *= 0.9996;
 
     if (star.x < 0) {
       star.x = width;
-      star.vx = 0;
     } else if (star.x > width) {
       star.x = 0;
-      star.vx = 0;
     }
 
     if (star.y < 0) {
       star.y = height;
-      star.vy = 0;
     } else if (star.y > height) {
       star.y = 0;
-      star.vy = 0;
     }
 
     drawStar(ctx, star);
@@ -136,6 +127,8 @@ const drawCanvas = (
 
   canvas.current.width = width;
   canvas.current.height = height;
+
+  console.log(canvas.current.width, canvas.current.height, width, height);
 
   draw(
     ctx,

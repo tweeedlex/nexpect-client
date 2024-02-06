@@ -28,6 +28,11 @@ const ScrollView = ({ active }) => {
   const intersectionObserver = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
       if (entry.isIntersecting) {
+        let color = entry.target.getAttribute("data-color");
+        console.log(color);
+        if (color) {
+          document.body.style.backgroundColor = color;
+        }
         entry.target.classList.add(styles.show);
       } else {
         entry.target.classList.remove(styles.show);
@@ -35,22 +40,9 @@ const ScrollView = ({ active }) => {
     });
   });
 
-  // change background color on scroll
-
-  const scrollHandler = () => {
-    if (scrollYProgress.get() < 0.25) {
-      document.body.style.backgroundColor = "#000218";
-    } else if (scrollYProgress.get() < 0.75) {
-      document.body.style.backgroundColor = "#c647d1";
-    } else {
-      document.body.style.backgroundColor = "#1C1A75";
-    }
-  };
-
   useEffect(() => {
     const body = document.querySelector("body");
     const app = document.querySelector(".App");
-    window.addEventListener("scroll", scrollHandler);
 
     const hiddenElements = document.querySelectorAll(".hidden");
     hiddenElements.forEach((e) => intersectionObserver.observe(e));
@@ -64,15 +56,8 @@ const ScrollView = ({ active }) => {
     return () => {
       body.className = "";
       app.style.padding = "0 20px";
-      window.removeEventListener("scroll", scrollHandler);
     };
   }, [active]);
-
-  useEffect(() => {
-    if (active) {
-      scrollHandler();
-    }
-  }, [scrollYProgress]);
 
   useEffect(() => {
     const handleMouseMove = (event) => {
@@ -157,13 +142,13 @@ const ScrollView = ({ active }) => {
       {active ? (
         <div
           style={{
-            height: "500vh",
             scrollSnapType: "y mandatory",
             position: "relative",
             transition: "background-color 0.3s ease",
           }}
         >
-          <Screen offset={0}>
+          <Screen offset={0} className={styles.screen1}>
+            <span className="hidden" data-color="#000218"></span>
             <div className={styles.wrapper}>
               <div className={styles.content}>
                 <span></span>
@@ -209,8 +194,10 @@ const ScrollView = ({ active }) => {
                 <div className={styles.bottom}></div>
               </div>
             </div>
+            <span className="hidden" data-color="#000218"></span>
           </Screen>
-          <Screen className={styles.screen2} offset={1}>
+          <Screen className={styles.screen2}>
+            <span className="hidden" data-color="#c647d1"></span>
             <div className={styles.content + " " + styles.contentScreen2}>
               <div className={styles.text}>
                 <div className={styles.title}>We can create</div>
@@ -227,8 +214,10 @@ const ScrollView = ({ active }) => {
               className={`${styles.abstractRightImage} ${styles.hidden} hidden`}
               alt=""
             />
+            <span className="hidden" data-color="#c647d1"></span>
           </Screen>
-          <Screen offset={2} className={styles.screen3}>
+          <Screen className={styles.screen3}>
+            <span className="hidden" data-color="#4e4cf1"></span>
             <div className={styles.content + " " + styles.contentScreen3}>
               <div className={styles.text}>
                 <div className={styles.title}>Unique, interesting</div>
@@ -249,6 +238,7 @@ const ScrollView = ({ active }) => {
               className={`${styles.abstractRightImage} ${styles.abstractRightBlueImage} ${styles.hidden} hidden`}
               alt=""
             />
+            <span className="hidden" data-color="#4e4cf1"></span>
           </Screen>
           <motion.div className={styles.progress} style={{ scaleX }} />
           <div className={styles.transition} ref={transition}></div>

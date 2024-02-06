@@ -17,10 +17,11 @@ const MainPage = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    drawCanvas(canvas, starsRef, animationsRef, cursorPosition, starsMoving);
-    window.addEventListener("resize", () =>
-      drawCanvas(canvas, starsRef, animationsRef, cursorPosition, starsMoving)
-    );
+    const draw = () =>
+      drawCanvas(canvas, starsRef, animationsRef, cursorPosition, starsMoving);
+
+    draw();
+    window.addEventListener("resize", draw);
 
     const body = document.querySelector("body");
     body.style.backgroundColor = "none";
@@ -33,9 +34,7 @@ const MainPage = () => {
 
     return () => {
       document.removeEventListener("mousemove", handleMouseMove);
-      window.removeEventListener("resize", () =>
-        drawCanvas(canvas, starsRef, animationsRef, cursorPosition, starsMoving)
-      );
+      window.removeEventListener("resize", draw);
       animationsRef.current.forEach((animationRef) => {
         cancelAnimationFrame(animationRef.current);
       });

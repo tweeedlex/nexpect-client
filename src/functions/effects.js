@@ -1,5 +1,5 @@
 export const darknessEffect = (next, timeout) => {
-  const effectBlock = document.querySelector(".effect-block");
+  const effectBlock = document.querySelector(".darkness-effect-block");
   effectBlock.style.display = "flex";
   effectBlock.classList.add("darkness");
 
@@ -7,9 +7,6 @@ export const darknessEffect = (next, timeout) => {
     if (next) {
       next();
     }
-
-    effectBlock.classList.remove("darkness");
-    effectBlock.style.display = "none";
   }, timeout);
 };
 
@@ -24,6 +21,8 @@ export const releaseDarknessEffect = (next, timeout) => {
     }
 
     effectBlock.style.opacity = 0;
-    effectBlock.style.display = "none";
+    setTimeout(() => {
+      effectBlock.style.display = "none";
+    }, 500);
   }, timeout);
 };

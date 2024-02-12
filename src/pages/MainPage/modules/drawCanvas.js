@@ -128,8 +128,6 @@ const drawCanvas = (
   canvas.current.width = width;
   canvas.current.height = height;
 
-  console.log(canvas.current.width, canvas.current.height, width, height);
-
   draw(
     ctx,
     width,

@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-import * as THREE from "three";
 import { GLTFLoader } from "three/addons/loaders/GLTFLoader";
 import styles from "./ModelsView.module.scss";
 
@@ -14,14 +13,14 @@ const ModelsView = ({ active, next }) => {
       }
       return;
     }
-    const glftLoader = new GLTFLoader();
+    const gltfLoader = new GLTFLoader();
 
     const burgerScene = new SceneInit("three-canvas-burger");
     burgerScene.initialize();
     burgerScene.animate();
 
     let burgerModel;
-    glftLoader.load("/assets/models/burger/scene.gltf", (gltfScene) => {
+    gltfLoader.load("/assets/models/donut/scene.gltf", (gltfScene) => {
       burgerModel = gltfScene;
       gltfScene.scene.rotation.y = -1;
       gltfScene.scene.position.y = 0;
@@ -31,13 +30,13 @@ const ModelsView = ({ active, next }) => {
     });
 
     const animateBurger = () => {
-      if (burgerModel) {
-        burgerModel.scene.rotation.x -= 0.0002;
-        burgerModel.scene.rotation.y += 0.001;
-        burgerModel.scene.rotation.z -= 0.0002;
-        burgerModel.scene.position.x += 0.01;
-        burgerModel.scene.position.z -= 0.02;
-      }
+      // if (burgerModel) {
+      //   burgerModel.scene.rotation.x -= 0.0002;
+      //   burgerModel.scene.rotation.y += 0.001;
+      //   burgerModel.scene.rotation.z -= 0.0002;
+      //   burgerModel.scene.position.x += 0.01;
+      //   burgerModel.scene.position.z -= 0.02;
+      // }
       requestAnimationFrame(animateBurger);
     };
 
@@ -47,19 +46,13 @@ const ModelsView = ({ active, next }) => {
   return (
     <>
       {active ? (
-        <div style={{ display: active ? "block" : "none" }}>
-          <p
-            className={styles.p}
-            style={{ display: active ? "block" : "none" }}
-          >
-            A 3D model
-          </p>
-          <div>
-            <canvas className={styles.canvas} id="three-canvas-burger" />
-          </div>
-          <button className={styles.button} onClick={() => next()}>
-            Show me more!
-          </button>
+        <div
+          style={{ display: active ? "block" : "none" }}
+          className={styles.page}
+        >
+          {/* <button className={styles.button} onClick={() => next()}>
+            Continue
+          </button> */}
         </div>
       ) : (
         <></>

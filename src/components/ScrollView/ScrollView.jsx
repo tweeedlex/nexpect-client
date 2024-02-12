@@ -29,7 +29,6 @@ const ScrollView = ({ active }) => {
     entries.forEach((entry) => {
       if (entry.isIntersecting) {
         let color = entry.target.getAttribute("data-color");
-        console.log(color);
         if (color) {
           document.body.style.backgroundColor = color;
         }

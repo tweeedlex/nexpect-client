@@ -10,7 +10,6 @@ const WalkThrough = () => {
     { text: "any site", active: false },
     { text: "that you can", active: false },
     { text: "imagine", active: false },
-    { text: "Let’s put on your site", active: false },
   ]);
 
   const [interactivitySlides, setInteractivitySlides] = useState([

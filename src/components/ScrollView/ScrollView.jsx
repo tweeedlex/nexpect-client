@@ -54,7 +54,6 @@ const ScrollView = ({ active }) => {
 
     return () => {
       body.className = "";
-      app.style.padding = "0 20px";
     };
   }, [active]);
 

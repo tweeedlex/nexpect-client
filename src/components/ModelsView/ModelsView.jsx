@@ -16,8 +16,8 @@ const ModelsView = ({ active, next }) => {
     const gltfLoader = new GLTFLoader();
 
     const burgerScene = new SceneInit("three-canvas-burger");
-    burgerScene.initialize();
-    burgerScene.animate();
+    // burgerScene.initialize();
+    // burgerScene.animate();
 
     let burgerModel;
     gltfLoader.load("/assets/models/donut/scene.gltf", (gltfScene) => {
@@ -50,9 +50,20 @@ const ModelsView = ({ active, next }) => {
           style={{ display: active ? "block" : "none" }}
           className={styles.page}
         >
-          {/* <button className={styles.button} onClick={() => next()}>
-            Continue
-          </button> */}
+          <div className={styles.screen + " " + styles.screen1}>
+            <p>Let your business stand out with a website</p>
+          </div>
+          <div className={styles.screen + " " + styles.screen2}>
+            <p>Show your products and services on a website like in a movie </p>
+          </div>
+          <div className={styles.screen + " " + styles.screen3}>
+            <div>
+              <p>Movie you can interact with</p>
+              <button className={styles.button} onClick={() => next()}>
+                Continue
+              </button>
+            </div>
+          </div>
         </div>
       ) : (
         <></>

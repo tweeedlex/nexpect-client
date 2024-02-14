@@ -33,7 +33,7 @@ export default class SceneInit {
       1,
       1000
     );
-    this.camera.position.z = 48;
+    this.camera.position.z = 2;
 
     // NOTE: Specify a canvas which is already created in the HTML.
     const canvas = document.getElementById(this.canvasId);
@@ -41,6 +41,7 @@ export default class SceneInit {
       canvas,
       // NOTE: Anti-aliasing smooths out the edges.
       antialias: true,
+      alpha: true,
     });
     this.renderer.setSize(window.innerWidth - 17, window.innerHeight);
     // this.renderer.shadowMap.enabled = false;

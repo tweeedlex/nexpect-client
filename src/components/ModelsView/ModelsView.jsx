@@ -1,10 +1,13 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { GLTFLoader } from "three/addons/loaders/GLTFLoader";
 import styles from "./ModelsView.module.scss";
-
+import * as THREE from "three";
 import SceneInit from "../../lib/SceneInit";
+import { useScroll, useSpring } from "framer-motion";
 
 const ModelsView = ({ active, next }) => {
+  const [donut, setDonut] = useState(null);
+
   useEffect(() => {
     if (!active) {
       const canvas = document.getElementById("three-canvas-burger");
@@ -16,18 +19,24 @@ const ModelsView = ({ active, next }) => {
     const gltfLoader = new GLTFLoader();
 
     const burgerScene = new SceneInit("three-canvas-burger");
-    // burgerScene.initialize();
-    // burgerScene.animate();
+    burgerScene.initialize();
+    burgerScene.animate();
 
-    let burgerModel;
     gltfLoader.load("/assets/models/donut/scene.gltf", (gltfScene) => {
-      burgerModel = gltfScene;
-      gltfScene.scene.rotation.y = -1;
-      gltfScene.scene.position.y = 0;
-      gltfScene.scene.position.x = -10;
-      gltfScene.scene.scale.set(5, 5, 5);
+      gltfScene.scene.position.x = -0.7;
+      gltfScene.scene.rotation.x = Math.PI / 3;
+      gltfScene.scene.rotation.z = -(Math.PI / 12);
+      gltfScene.scene.scale.set(10, 10, 10);
       burgerScene.scene.add(gltfScene.scene);
+      setDonut(gltfScene.scene);
     });
+
+    const light = new THREE.PointLight(0xffffff, 3, 1000);
+    light.position.set(0, 0, 1);
+    burgerScene.scene.add(light);
+
+    const body = document.querySelector("body");
+    body.style.color = "rgba(255, 255, 255, 0.4)";
 
     const animateBurger = () => {
       // if (burgerModel) {
@@ -43,6 +52,37 @@ const ModelsView = ({ active, next }) => {
     animateBurger();
   }, [active]);
 
+  const { scrollYProgress } = useScroll();
+  const scaleX = useSpring(scrollYProgress, {
+    stiffness: 100,
+    damping: 30,
+    restDelta: 0.001,
+  });
+  scaleX.set(0);
+
+  const updatePosition = () => {
+    if (scaleX.get() < 0.5) {
+      donut.position.x = -0.7 + scaleX.get() * 2;
+      const progress = scaleX.get() * 2;
+      donut.rotation.z = -(Math.PI / 12) * progress;
+    } else {
+      donut.position.x = 0.3 - (scaleX.get() - 0.5) * 0.72;
+      donut.position.y = -(scaleX.get() - 0.5);
+      const progress = (scaleX.get() - 0.5) * 2;
+      donut.rotation.z = -(Math.PI / 12) * (1 - progress);
+    }
+
+    console.log(donut.position.x, " ", scaleX.get());
+    requestAnimationFrame(updatePosition);
+  };
+
+  useEffect(() => {
+    console.log(active, donut);
+    if (donut) {
+      updatePosition();
+    }
+  }, [scaleX, active, donut]);
+
   return (
     <>
       {active ? (
@@ -50,6 +90,11 @@ const ModelsView = ({ active, next }) => {
           style={{ display: active ? "block" : "none" }}
           className={styles.page}
         >
+          <canvas
+            style={{ background: "none !importnant" }}
+            id="three-canvas-burger"
+            className={styles.canvas}
+          ></canvas>
           <div className={styles.screen + " " + styles.screen1}>
             <p>Let your business stand out with a website</p>
           </div>

@@ -10,6 +10,23 @@
   transition: opacity 0.5s ease-in-out;
 }
 
+.planet {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url("../../img/main-bg.jpg") 0 0 / cover;
+  opacity: 0.5;
+  z-index: -2;
+  transition: transform 0.5s ease-in-out, opacity 0.5s ease-in-out;
+
+  &.hidden {
+    transform: translateY(100px);
+    opacity: 0;
+  }
+}
+
 .page.hidden {
   opacity: 0;
   pointer-events: none;
@@ -19,6 +36,7 @@
   font-size: 72px;
   font-weight: 900;
   line-height: normal;
+  z-index: 1;
 }
 
 .text {
@@ -26,6 +44,7 @@
   flex-direction: column;
   align-items: center;
   gap: 20px;
+  z-index: 1;
 }
 
 .text h1 {
@@ -123,7 +142,6 @@
   position: absolute;
   top: 0;
   left: 0;
-  background-color: #000;
   width: 100%;
   height: 100%;
   z-index: -1;

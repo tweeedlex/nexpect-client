@@ -7,6 +7,7 @@ import { useScroll, useSpring } from "framer-motion";
 
 const ModelsView = ({ active, next }) => {
   const [donut, setDonut] = useState(null);
+  let animationId;
 
   useEffect(() => {
     if (!active) {
@@ -23,7 +24,8 @@ const ModelsView = ({ active, next }) => {
     burgerScene.animate();
 
     gltfLoader.load("/assets/models/donut/scene.gltf", (gltfScene) => {
-      gltfScene.scene.position.x = -0.7;
+      const startX = window.innerWidth < 767 ? -0.4 : -0.7;
+      gltfScene.scene.position.x = startX;
       gltfScene.scene.rotation.x = Math.PI / 3;
       gltfScene.scene.rotation.z = -(Math.PI / 12);
       gltfScene.scene.scale.set(10, 10, 10);
@@ -31,56 +33,69 @@ const ModelsView = ({ active, next }) => {
       setDonut(gltfScene.scene);
     });
 
-    const light = new THREE.PointLight(0xffffff, 3, 1000);
-    light.position.set(0, 0, 1);
-    burgerScene.scene.add(light);
+    const rightLight = new THREE.PointLight(0xffffff, 3, 1000);
+    rightLight.position.set(2, 0, 1);
+    burgerScene.scene.add(rightLight);
+
+    const leftLight = new THREE.PointLight(0xffffff, 3, 1000);
+    leftLight.position.set(-2, 0, 1);
+    burgerScene.scene.add(leftLight);
 
     const body = document.querySelector("body");
     body.style.color = "rgba(255, 255, 255, 0.4)";
 
-    const animateBurger = () => {
-      // if (burgerModel) {
-      //   burgerModel.scene.rotation.x -= 0.0002;
-      //   burgerModel.scene.rotation.y += 0.001;
-      //   burgerModel.scene.rotation.z -= 0.0002;
-      //   burgerModel.scene.position.x += 0.01;
-      //   burgerModel.scene.position.z -= 0.02;
-      // }
-      requestAnimationFrame(animateBurger);
+    return () => {
+      const canvas = document.getElementById("three-canvas-burger");
+      if (canvas) {
+        canvas.remove();
+      }
     };
-
-    animateBurger();
   }, [active]);
 
   const { scrollYProgress } = useScroll();
   const scaleX = useSpring(scrollYProgress, {
     stiffness: 100,
     damping: 30,
-    restDelta: 0.001,
+    restDelta: 0.01,
   });
   scaleX.set(0);
 
   const updatePosition = () => {
+    const startingPosition = window.innerWidth < 767 ? -0.4 : -0.7;
+    const adjustment = window.innerWidth < 767 ? 0.3 : 0;
+
     if (scaleX.get() < 0.5) {
-      donut.position.x = -0.7 + scaleX.get() * 2;
-      const progress = scaleX.get() * 2;
+      const progress = scaleX.get() * (2 - adjustment * 1.9);
+      donut.position.x = startingPosition + progress;
       donut.rotation.z = -(Math.PI / 12) * progress;
     } else {
-      donut.position.x = 0.3 - (scaleX.get() - 0.5) * 0.72;
-      donut.position.y = -(scaleX.get() - 0.5);
+      donut.position.x =
+        startingPosition + 1 - (scaleX.get() - 0.5) * 0.72 - adjustment;
+      donut.position.y = -(scaleX.get() * 1.2 - 0.5);
       const progress = (scaleX.get() - 0.5) * 2;
       donut.rotation.z = -(Math.PI / 12) * (1 - progress);
+
+      if (scaleX.get() >= 0.7) {
+        const scaleProgress = (scaleX.get() - 0.7) * (10 / 3);
+        const scale = 10 + scaleProgress * 2;
+        donut.scale.set(scale, scale, scale);
+
+        const rotationProgress = scaleProgress;
+        donut.rotation.x = Math.PI / 3 - (Math.PI / 12) * rotationProgress;
+      }
     }
 
-    console.log(donut.position.x, " ", scaleX.get());
-    requestAnimationFrame(updatePosition);
+    return requestAnimationFrame(updatePosition);
   };
 
   useEffect(() => {
-    console.log(active, donut);
     if (donut) {
-      updatePosition();
+      animationId = updatePosition();
     }
+
+    return () => {
+      cancelAnimationFrame(animationId);
+    };
   }, [scaleX, active, donut]);
 
   return (

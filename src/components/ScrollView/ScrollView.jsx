@@ -54,6 +54,7 @@ const ScrollView = ({ active }) => {
 
     return () => {
       body.className = "";
+      body.style = "";
     };
   }, [active]);
 
@@ -132,7 +133,7 @@ const ScrollView = ({ active }) => {
     transition.current.classList.add(styles.show);
     setTimeout(() => {
       navigate("/contact-us");
-    }, 400);
+    }, 300);
   };
 
   return (

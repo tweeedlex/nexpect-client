@@ -64,6 +64,11 @@ const MainPage = () => {
   return (
     <>
       <div className="darkness-effect-block"></div>
+      <div
+        className={
+          styles.planet + " " + (wasButtonClicked ? styles.hidden : "")
+        }
+      ></div>
       <canvas ref={canvas} className={styles.canvas}></canvas>
       <div
         className={styles.page + " " + (wasButtonClicked ? styles.hidden : "")}

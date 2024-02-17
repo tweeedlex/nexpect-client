@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import styles from "./MainPage.module.scss";
 import drawCanvas from "./modules/drawCanvas";
 import hyperspaceEffect from "./modules/hyperspaceEffect";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { darknessEffect, releaseDarknessEffect } from "../../functions/effects";
 
 const MainPage = () => {
@@ -61,6 +61,15 @@ const MainPage = () => {
     }
   };
 
+  const transition = useRef(null);
+
+  const showContactUs = () => {
+    transition.current.classList.add(styles.show);
+    setTimeout(() => {
+      navigate("/contact-us");
+    }, 300);
+  };
+
   return (
     <>
       <div className="darkness-effect-block"></div>
@@ -87,8 +96,11 @@ const MainPage = () => {
             <span>Start a short walk-through</span>
           </button>
         </div>
-        <span></span>
+        <button onClick={showContactUs}>
+          <span className={styles.contactUs}>Contact us</span>
+        </button>
       </div>
+      <div className={styles.transition} ref={transition}></div>
     </>
   );
 };

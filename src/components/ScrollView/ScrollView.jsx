@@ -12,6 +12,7 @@ import abstractLeftBlueImage from "../../img/abstract-blue-left.png";
 import abstractRightBlueImage from "../../img/abstract-blue-right.png";
 import mailImage from "../../img/mail.png";
 import { Link, useNavigate } from "react-router-dom";
+import { releaseDarknessEffect } from "../../functions/effects";
 
 const ScrollView = ({ active }) => {
   const [triangles, setTriangles] = useState([]);
@@ -40,6 +41,10 @@ const ScrollView = ({ active }) => {
   });
 
   useEffect(() => {
+    if (active) {
+      releaseDarknessEffect(null, 200);
+    }
+
     const body = document.querySelector("body");
     const app = document.querySelector(".App");
 
@@ -152,9 +157,9 @@ const ScrollView = ({ active }) => {
               <div className={styles.content}>
                 <span></span>
                 <div className={styles.text}>
-                  <div className={styles.title}>Just scroll down</div>
+                  <div className={styles.title}>Increase your profits</div>
                   <div className={styles.subtitle}>
-                    and feel these transitions...
+                    with innovative-designed website
                   </div>
                 </div>
                 <img className={styles.chevron} src={chevronImage} alt="" />
@@ -199,8 +204,8 @@ const ScrollView = ({ active }) => {
             <span className="hidden" data-color="#c647d1"></span>
             <div className={styles.content + " " + styles.contentScreen2}>
               <div className={styles.text}>
-                <div className={styles.title}>We can create</div>
-                <div className={styles.subtitle}>site like this for you</div>
+                <div className={styles.title}>We will create</div>
+                <div className={styles.subtitle}>a site like this for you</div>
               </div>
             </div>
             <img

@@ -4,6 +4,7 @@ import styles from "./ModelsView.module.scss";
 import * as THREE from "three";
 import SceneInit from "../../lib/SceneInit";
 import { useScroll, useSpring } from "framer-motion";
+import { releaseDarknessEffect } from "../../functions/effects";
 
 const ModelsView = ({ active, next }) => {
   const [donut, setDonut] = useState(null);
@@ -17,6 +18,11 @@ const ModelsView = ({ active, next }) => {
       }
       return;
     }
+
+    if (active) {
+      releaseDarknessEffect(null, 200);
+    }
+
     const gltfLoader = new GLTFLoader();
 
     const burgerScene = new SceneInit("three-canvas-burger");
@@ -102,15 +108,27 @@ const ModelsView = ({ active, next }) => {
     <>
       {active ? (
         <div
-          style={{ display: active ? "block" : "none" }}
+          style={{
+            display: active ? "block" : "none",
+          }}
           className={styles.page}
         >
+          <div className="effect-block"></div>
           <canvas
             style={{ background: "none !importnant" }}
             id="three-canvas-burger"
             className={styles.canvas}
           ></canvas>
           <div className={styles.screen + " " + styles.screen1}>
+            <div>
+              {donut ? (
+                ""
+              ) : (
+                <div className={styles.preloaderWrapper}>
+                  <div className="preloader"></div>Loading 3D model...
+                </div>
+              )}
+            </div>
             <p>Let your business stand out with a website</p>
           </div>
           <div className={styles.screen + " " + styles.screen2}>

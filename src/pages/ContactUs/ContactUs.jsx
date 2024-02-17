@@ -15,6 +15,8 @@ const ContactUs = () => {
   const [tooltip, setTooltip] = useState({ show: false, x: 0, y: 0 });
 
   useEffect(() => {
+    window.scrollTo(0, 0);
+
     document.body.style.transition = "none";
     document.body.style.backgroundColor = "#161616";
 

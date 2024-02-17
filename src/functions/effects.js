@@ -13,6 +13,7 @@ export const darknessEffect = (next, timeout) => {
 export const releaseDarknessEffect = (next, timeout) => {
   const effectBlock = document.querySelector(".effect-block");
   effectBlock.style.display = "flex";
+  effectBlock.style.opacity = "1";
   effectBlock.classList.add("darkness");
 
   setTimeout(() => {

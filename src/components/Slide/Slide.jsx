@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./Slide.module.scss";
 
-const Slide = ({ text, active }) => {
+const Slide = ({ text, active, isWhite }) => {
   const animations = [
     "slideInLeft",
     "slideInRight",
@@ -13,7 +13,15 @@ const Slide = ({ text, active }) => {
     animations[Math.floor(Math.random() * animations.length)];
 
   return (
-    <div className={styles.slide + " " + (active ? styles.active : "")}>
+    <div
+      className={
+        styles.slide +
+        " " +
+        (active ? styles.active : "") +
+        " " +
+        (isWhite ? styles.white : "")
+      }
+    >
       <div
         className={`${styles.content} ${styles.scale} ${
           styles[`${randomAnimation}`]

@@ -67,6 +67,7 @@
   font-size: 48px;
   font-weight: 800;
   animation: title 3.5s ease;
+  line-height: normal;
 }
 
 .arrowBox {
@@ -835,7 +836,7 @@
   position: fixed;
   z-index: 1001;
   &.show {
-    animation: appear 0.3s ease forwards;
+    animation: appear 0.35s ease forwards;
     top: 0;
   }
 }

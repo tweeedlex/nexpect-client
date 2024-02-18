@@ -40,18 +40,32 @@
   font-weight: 200;
   text-transform: uppercase;
   letter-spacing: 5px;
+  text-align: center;
 
   animation: scale 1s linear;
 }
 
 @keyframes scale {
   0% {
-    transform: scale(1);
+    transform: scale(0.8);
     letter-spacing: 5px;
   }
   100% {
-    transform: scale(1.2);
+    transform: scale(1);
     letter-spacing: 8px;
+  }
+}
+
+@media (max-width: 767px) {
+  @keyframes scale {
+    0% {
+      transform: scale(0.8);
+      letter-spacing: 5px;
+    }
+    100% {
+      transform: scale(1);
+      letter-spacing: 5px;
+    }
   }
 }
 

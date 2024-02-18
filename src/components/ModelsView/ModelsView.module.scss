@@ -176,3 +176,13 @@
   gap: 20px;
   font-size: 24px;
 }
+
+@media (max-width: 767px) {
+  .preloaderWrapper {
+    font-size: 18px;
+    flex-direction: column-reverse;
+    text-align: left;
+    align-items: flex-start;
+    gap: 10px;
+  }
+}

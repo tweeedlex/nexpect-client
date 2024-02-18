@@ -4,9 +4,11 @@
   align-items: center;
   justify-content: space-between;
   padding: 100px 20px;
-  height: 100vh;
+  min-height: 100vh;
+  height: max-content;
   text-align: center;
   opacity: 1;
+  gap: 40px;
   transition: opacity 0.5s ease-in-out;
 }
 
@@ -147,6 +149,26 @@
   z-index: -1;
 }
 
+.contactUs {
+  font-size: 20px;
+  font-weight: 600;
+  line-height: normal;
+  padding: 10px 20px;
+  border-bottom: 1px solid #fff;
+  border-top: 1px solid #fff;
+  transition: padding 0.3s ease-in-out;
+  position: relative;
+  box-shadow: 0 0 15px#0000004d;
+
+  &:hover {
+    padding: 10px 50px;
+  }
+
+  &:active {
+    transform: scale(0.95);
+  }
+}
+
 @media (max-width: 1023px) {
   .page {
     padding: 50px 15px;
@@ -179,6 +201,10 @@
 
   .button span {
     font-size: 16px;
+  }
+
+  .contactUs {
+    font-size: 18px;
   }
 }
 
@@ -214,6 +240,10 @@
 
   .button span {
     font-size: 14px;
+  }
+
+  .contactUs {
+    font-size: 16px;
   }
 }
 
@@ -254,25 +284,10 @@
   .button span {
     font-size: 12px;
   }
-}
 
-.contactUs {
-  font-size: 20px;
-  font-weight: 600;
-  line-height: normal;
-  padding: 10px 20px;
-  border-bottom: 1px solid #fff;
-  border-top: 1px solid #fff;
-  transition: padding 0.3s ease-in-out;
-  position: relative;
-  box-shadow: 0 0 15px#0000004d;
-
-  &:hover {
-    padding: 10px 50px;
-  }
-
-  &:active {
-    transform: scale(0.95);
+  .contactUs {
+    font-size: 14px;
+    padding: 7px 10px;
   }
 }
 
@@ -298,5 +313,128 @@
   }
   100% {
     top: 0;
+  }
+}
+
+@media (max-height: 750px) {
+  .page {
+    padding: 50px 15px;
+  }
+
+  .logo {
+    font-size: 48px;
+  }
+
+  .text h1 {
+    font-size: 72px;
+    line-height: unset;
+  }
+
+  .subtitle,
+  .subtitle span {
+    font-size: 24px;
+  }
+
+  .lastParagraph {
+    font-size: 18px;
+  }
+
+  .button {
+    padding: 10px 20px;
+  }
+
+  .button:hover {
+    padding: 10px 30px;
+  }
+
+  .button span {
+    font-size: 16px;
+  }
+
+  .contactUs {
+    font-size: 18px;
+  }
+}
+
+@media (max-height: 530px) {
+  .page {
+    padding: 20px 10px;
+  }
+
+  .logo {
+    font-size: 36px;
+  }
+
+  .text h1 {
+    font-size: 48px;
+  }
+
+  .subtitle,
+  .subtitle span {
+    font-size: 18px;
+  }
+
+  .lastParagraph {
+    font-size: 14px;
+  }
+
+  .button {
+    padding: 10px 20px;
+  }
+
+  .button:hover {
+    padding: 10px 30px;
+  }
+
+  .button span {
+    font-size: 14px;
+  }
+
+  .contactUs {
+    font-size: 16px;
+  }
+}
+
+@media (max-height: 400px) {
+  .text {
+    gap: 10px;
+  }
+
+  .page {
+    padding: 20px 10px;
+  }
+
+  .logo {
+    font-size: 24px;
+  }
+
+  .text h1 {
+    font-size: 36px;
+  }
+
+  .subtitle,
+  .subtitle span {
+    font-size: 14px;
+  }
+
+  .lastParagraph {
+    font-size: 12px;
+  }
+
+  .button {
+    padding: 10px 20px;
+  }
+
+  .button:hover {
+    padding: 10px 30px;
+  }
+
+  .button span {
+    font-size: 12px;
+  }
+
+  .contactUs {
+    font-size: 14px;
+    padding: 7px 10px;
   }
 }

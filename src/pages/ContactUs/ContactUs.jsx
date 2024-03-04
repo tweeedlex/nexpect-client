@@ -61,7 +61,7 @@ const ContactUs = () => {
     text: "",
   });
 
-  const sendForm = () => {
+  const sendForm = async () => {
     if (!contactData.name || !contactData.contacts) {
       setPopupMessage({
         visible: true,
@@ -70,7 +70,14 @@ const ContactUs = () => {
       return;
     }
 
-    sendContact(contactData);
+    const responseData = await sendContact(contactData);
+    if (responseData.message === "ERROR_TOO_MANY_REQUESTS") {
+      setPopupMessage({
+        visible: true,
+        text: "Too many requests, please try again later",
+      });
+      return;
+    }
     setContactData({ name: "", contacts: "", message: "" });
     setPopupMessage({ visible: true, text: "Thank you for your message!" });
   };

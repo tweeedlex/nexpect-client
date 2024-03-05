@@ -87,8 +87,8 @@
     width: 900px;
   }
 }
-
-@media (max-width: 767px) {
+// max width or max height
+@media (max-width: 767px) or (max-height: 767px) {
   .screen {
     p {
       width: 400px;
@@ -98,7 +98,7 @@
   }
 }
 
-@media (max-width: 479px) {
+@media (max-width: 479px) or (max-height: 479px) {
   .screen {
     p {
       width: 280px;
@@ -148,14 +148,14 @@
   }
 }
 
-@media (max-width: 767px) {
+@media (max-width: 767px) or (max-height: 767px) {
   .button {
     font-size: 18px;
     padding: 10px 20px;
   }
 }
 
-@media (max-width: 479px) {
+@media (max-width: 479px) or (max-height: 479px) {
   .button {
     font-size: 14px;
   }

@@ -10,6 +10,8 @@ const ModelsView = ({ active, next }) => {
   const [donut, setDonut] = useState(null);
   let animationId;
 
+  const initialScale = window.innerWidth < 767 ? 5 : 10;
+
   useEffect(() => {
     if (!active) {
       const canvas = document.getElementById("three-canvas-burger");
@@ -34,7 +36,7 @@ const ModelsView = ({ active, next }) => {
       gltfScene.scene.position.x = startX;
       gltfScene.scene.rotation.x = Math.PI / 3;
       gltfScene.scene.rotation.z = -(Math.PI / 12);
-      gltfScene.scene.scale.set(10, 10, 10);
+      gltfScene.scene.scale.set(initialScale, initialScale, initialScale);
       burgerScene.scene.add(gltfScene.scene);
       setDonut(gltfScene.scene);
     });
@@ -83,7 +85,7 @@ const ModelsView = ({ active, next }) => {
 
       if (scaleX.get() >= 0.7) {
         const scaleProgress = (scaleX.get() - 0.7) * (10 / 3);
-        const scale = 10 + scaleProgress * 2;
+        const scale = initialScale + scaleProgress * 2;
         donut.scale.set(scale, scale, scale);
 
         const rotationProgress = scaleProgress;
